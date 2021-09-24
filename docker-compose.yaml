@@ -1,7 +1,7 @@
 version: '3'
 services:
   packet-forwarder:
-    image: ruff_pkt_fwd:latest
+    image:"hummingbirdminer/hnt-pkt-fwd:0.1.0"
         #network_mode: "host"
     logging:
         driver: journald
@@ -14,8 +14,9 @@ services:
     image: "quay.io/team-helium/miner:latest-arm64"
     privileged: true
     ulimits:
-      soft: "64000"
-      hard: "64000"
+      nofile:
+        soft: "64000"
+        hard: "64000"
     expose:
       - "4467"
       - "1680"
@@ -25,7 +26,7 @@ services:
       - '/var/run/dbus:/var/run/dbus'
       - '/var/data:/var/data'
       - 'pktfwdr:/var/pktfwd'
-      - '/home/pi/overlay/docker.config:/opt/miner/releases/2021.09.16.1/sys.config'
+      - './config/overlay/docker.config:/opt/miner/releases/2021.09.16.1/sys.config'
     cap_add:
       - SYS_RAWIO
     devices:
