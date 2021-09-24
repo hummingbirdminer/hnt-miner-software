@@ -25,9 +25,10 @@ function checkOriginUpdate() {
   # stop docker-compose first
     echo "Do self update"
     stopHummingbirdMiner
-    git pull
+    git stash
+    git merge '@{u}'
     chmod +x ${SELF_NAME}
-    exec ${SELF_NAME}
+    exec ./${SELF_NAME}
   fi
 }
 echo ${SELF_NAME}
