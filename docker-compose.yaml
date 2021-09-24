@@ -1,7 +1,7 @@
 version: '3'
 services:
   packet-forwarder:
-    image:"hummingbirdminer/hnt-pkt-fwd:0.1.0"
+    image: "hummingbirdminer/hnt-pkt-fwd:0.1.0"
         #network_mode: "host"
     logging:
         driver: journald
