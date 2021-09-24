@@ -31,6 +31,7 @@ function checkOriginUpdate() {
     exec ./${SELF_NAME}
   fi
 }
+echo "test for git update"
 echo ${SELF_NAME}
 checkOriginUpdate
 startHummingbirdMiner
