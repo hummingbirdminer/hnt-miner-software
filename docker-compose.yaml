@@ -13,6 +13,8 @@ services:
   helium-miner:
     image: "quay.io/team-helium/miner:latest-arm64"
     privileged: true
+    logging:
+        driver: journald
     ulimits:
       nofile:
         soft: "64000"
@@ -37,13 +39,17 @@ services:
       - 'RELEASE_BUMPER=foobar'
     labels:
       io.balena.features.dbus: '1'
-        #  ruffd:
-        #    image: ruffd:latest
-        #    restart: always
-        #    ports:
-        #      - 18831:80
-        #    volumes:
-        #      - ./test:/app/sys-data
+  gateway-config:
+    image: "hummingbirdiot/gateway-config:0.1.0"
+    logging:
+        driver: journald
+    privileged: true
+    ulimits:
+      nofile:
+        soft: "64000"
+        hard: "64000"
+    volumes:
+      - '/var/run/dbus:/var/run/dbus'
 
 volumes:
   miner-storage:
